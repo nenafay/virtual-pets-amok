@@ -9,7 +9,7 @@ import virtualpetsamok1.OrganicPet;
 
 public class OrganicTest {
 	
-	OrganicPet testOrganic;
+	OrganicPet testOrganicDog;
 
 	@Before
 	public void setUp() {
@@ -18,8 +18,8 @@ public class OrganicTest {
 	@Test
 	public void shouldHaveHealth() {
 		// act
-		testOrganic.setHealth(10);
-		int health = testOrganic.getHealth();
+		testOrganicDog.setHealth(10);
+		int health = testOrganicDog.getHealth();
 
 		// assert
 		assertEquals(10, health);
@@ -27,16 +27,16 @@ public class OrganicTest {
 	
 	@Test
 	public void shouldHaveHappiness() {
-		testOrganic.setHappiness(10);
-		int happiness = testOrganic.getHappiness();
+		testOrganicDog.setHappiness(10);
+		int happiness = testOrganicDog.getHappiness();
 		
 		assertEquals(10, happiness);
 	}
 	
 	@Test
 	public void shouldHaveHunger() {
-		testOrganic.setHunger(10);
-		int hunger = testOrganic.getHunger();
+		testOrganicDog.setHunger(10);
+		int hunger = testOrganicDog.getHunger();
 		
 		assertEquals(10, hunger);
 	}
@@ -44,8 +44,8 @@ public class OrganicTest {
 	@Test
 	public void shouldHaveThirst() {
 		
-		testOrganic.setThirst(10);
-		int hunger = testOrganic.getThirst();
+		testOrganicDog.setThirst(10);
+		int hunger = testOrganicDog.getThirst();
 		
 		assertEquals(10, hunger);
 		
@@ -53,8 +53,9 @@ public class OrganicTest {
 	
 	@Test
 	public void shouldPoopAfter3Feedings() {
-		testOrganic.poopTick();
-		testOrganic.
+		
+		
+	
 		
 	}
 	

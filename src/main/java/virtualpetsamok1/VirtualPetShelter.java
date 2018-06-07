@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.wcci.virtual_pet_shelter.VirtualPet;
-
 public class VirtualPetShelter {
 	
 	Map<String, VirtualPet> pets = new HashMap<>();
@@ -31,15 +29,28 @@ public class VirtualPetShelter {
 
 	}
 
-	public void feedOrganicPets() {
-		for(OrganicPet pets:getAllOrganicPets()) {//need to understand iterables to fix this
-			pets.beFed();
-		}
+	void feedOrganicPets() {
+		OrganicPet.beFed(0);
 	}
 
-	private Object getAllOrganicPets() {
-		return pets.values();
+	void waterOrganicPets() {
+		OrganicPet.beWatered(0);
 	}
+
+	public void oilRoboticPets() {
+		RoboticPet.beOiled(0);
+	}
+
+	public void allowPlay() {
+		VirtualPet.bePlayedWith(0);
+	}
+
+	public void tick() {
+		OrganicPet.increaseHunger(0);
+		OrganicPet.increaseThirst(0);
+		RoboticPet.decreaseOilLevel(0);
+	}
+
 	
 
 }

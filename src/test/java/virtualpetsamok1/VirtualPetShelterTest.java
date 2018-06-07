@@ -5,21 +5,13 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import virtualpetsamok1.OrganicCat;
-import virtualpetsamok1.OrganicDog;
-import virtualpetsamok1.RoboticCat;
-import virtualpetsamok1.RoboticDog;
-import virtualpetsamok1.VirtualPet;
-import virtualpetsamok1.VirtualPetShelter;
 
 // Most of these were passing, but now they're not. I have no idea why.
 public class VirtualPetShelterTest {
@@ -31,11 +23,14 @@ public class VirtualPetShelterTest {
 	
 	@Before
 	public void setup() {
+		
+		Map<String, VirtualPet>pets = new HashMap<>();
+		
 		underTest = new VirtualPetShelter();
 		testpet1 = new OrganicDog("Dinah", "American Bulldog mix, brindle coat", 0, 0, 0, 0, 0);
 		testpet2 = new OrganicCat("Andre", "Maine-Coon, long-hair", 0, 0, 0, 0);
-		testpet3 = new RoboticDog("Dash", "has nano-bot fleas", 0, 0, 0);
-		testpet4 = new RoboticCat("Dot", "chases anything that moves", 0, 0, 0);	
+		testpet3 = new RoboticDog("Dash", "has nano-bot fleas", 0, 0, 15);
+		testpet4 = new RoboticCat("Dot", "chases anything that moves", 0, 0, 15);	
 	}
 	@Test
 	public void shouldAddPetToShelter() {
@@ -76,15 +71,15 @@ public class VirtualPetShelterTest {
 		underTest.feedOrganicPets();
 		testpet1.getPetHunger();
 		testpet2.getPetHunger();
-		assertEquals(testpet1.hunger, 9);
-		assertEquals(testpet2.hunger, 8);//Compiler won't let me go to Organic.
+		assertEquals(testpet1.getHunger(), 9);
+		assertEquals(testpet2.getHunger(), 8);//Compiler won't let me go to Organic.
 	}
 	
 	@Test
 	public void shouldWaterOrganicPets() {
 		testpet1.setThirst(10);
 		testpet2.setThirst(9);
-		underTest.waterAllPets();
+		underTest.waterOrganicPets();
 		testpet1.getPetThirst();
 		testpet2.getPetThirst();
 		assertEquals(testpet1.thirst, 8);
@@ -94,20 +89,39 @@ public class VirtualPetShelterTest {
 	@Test
 	public void shouldAllowPlayWithOnePet() {
 		testpet1.setHappiness(3);
+		testpet4.setHappiness(4);
 		testpet2.setHappiness(4);
-		underTest.allowPlay(testpet1);
+		testpet3.setHappiness(4);
+		underTest.allowPlay();
 		testpet1.getHappiness();
-		testpet2.getPetHappiness();
-		assertEquals(testpet1.happiness, 1);
-		assertEquals(testpet2.happiness,4);
+		testpet2.getHappiness();
+		testpet3.getHappiness();
+		testpet4.getHappiness();
+		assertEquals(testpet1.getHappiness(),1);
+		assertEquals(testpet2.getHappiness(),4);		
 		
 	}
+	
+	@Test
+	public void shouldOilRoboticPets() {
+		testpet4.setOilLevel(7);
+		testpet3.setOilLevel(3);
+		underTest.oilRoboticPets();
+		testpet4.getOilLevel();
+		testpet3.getOilLevel();
+		assertEquals(testpet4.getOilLevel(), 4);
+		assertEquals(testpet3.getOilLevel(),0);
+	}
+	 
 	@Test
 	public void shouldCallTick() {
 		underTest.tick();
-		assertThat(testpet1.getPetHunger(), is(1));
-		assertThat(testpet1.getPetThirst(), is(1));
-		assertThat(testpet1.getPetBoredom(), is(1));
+		assertThat(testpet1.getHunger(), is(1));
+		assertThat(testpet2.getHunger(), is(1));
+		assertThat(testpet3.getOilLevel(), is(14));
+		assertThat(testpet4.getOilLevel(), is (14));
+		assertThat(testpet1.getThirst(), is(1));
+		assertThat(testpet2.getThirst(), is(1));
 		
 	}//everything was working beautifully... until it wasn't. I can't find the error.
 }
