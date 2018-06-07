@@ -10,7 +10,7 @@ public abstract class OrganicPet extends VirtualPet implements Poop{
 		OrganicPet.statHunger = hunger;
 	}
 	
-	public int getHunger() {
+	public static int getHunger() {
 		return OrganicPet.statHunger;
 	}
 
@@ -37,5 +37,15 @@ public abstract class OrganicPet extends VirtualPet implements Poop{
 
 	public static void increaseThirst(int thirst) {
 		thirst = thirst +1;
+	}
+
+	public static boolean wasFed() {
+		int hungerBefore = OrganicPet.getHunger();
+		OrganicPet.beFed(0);
+		int hungerAfter = OrganicPet.getHunger();
+		if (hungerBefore > hungerAfter);
+		{
+		return false;
+		}
 	}
 }

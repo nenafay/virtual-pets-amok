@@ -2,8 +2,8 @@ package virtualpetsamok1;
 
 public abstract class VirtualPet {
 
-	private int statHealth;
-	private int statHappiness;
+	private int petHealth;
+	protected static int petHappiness;
 	private String petName;
 	private String petDescription;
 
@@ -11,37 +11,37 @@ public abstract class VirtualPet {
 	/* Health Methods */
 	
 	public int getHealth() {
-		return this.statHealth;
+		return this.petHealth;
 	}
 	
-	public void subtractStatHealth(int health) {
-		this.statHealth -= health;
+	public void decreasePetHealth(int health) {
+		this.petHealth -= health;
 	}
 
 	public void setHealth(int health) {
-		this.statHealth = health;
+		this.petHealth = health;
 			
 	}
 
 	/* Happiness Methods */
 	
 	public void setHappiness(int happiness) {
-		this.setStatHappiness(happiness);
+		this.setPetHappiness(happiness);
 	}
 
 	public int getHappiness() {
-		return this.getStatHappiness();
+		return this.getPetHappiness();
 	}
 	
-	public void subtractStatHappiness(int happiness){
-		this.setStatHappiness(this.getStatHappiness() - happiness);
+	public void decreasePetHappiness(int happiness){
+		this.setPetHappiness(this.getPetHappiness() - happiness);
 	}
 
 	/* Health/Happiness Methods */
 	
 	public void sadSick() {
-		if (this.getStatHappiness() <3) {
-			this.statHealth = statHealth -1;
+		if (this.getPetHappiness() <3) {
+			this.petHealth = petHealth -1;
 		}		
 	
 	}
@@ -55,12 +55,12 @@ public abstract class VirtualPet {
 	
 	}
 
-	public int getStatHappiness() {
-		return statHappiness;
+	public int getPetHappiness() {
+		return petHappiness;
 	}
 
-	public void setStatHappiness(int statHappiness) {
-		this.statHappiness = statHappiness;
+	public void setPetHappiness(int happiness) {
+		this.petHappiness = happiness;
 	}
 
 	public static void bePlayedWith(int happiness) {

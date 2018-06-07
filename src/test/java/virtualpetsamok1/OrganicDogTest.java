@@ -13,6 +13,8 @@ public class OrganicDogTest {
 	OrganicDog testOrgDog1;
 	OrganicDog testOrgDog2;
 	Litterbox testLitter = new Litterbox();
+	private Object cageCleanliness;
+	private Object happiness;
 	
 
 	@Before
@@ -57,15 +59,22 @@ public class OrganicDogTest {
 		
 		assertEquals(10, happiness);
 	}
-	
 
 	@Test
 	public void walkiesMakeDogHappy() {
 		testOrgDog1.setHappiness(4);
 		testOrgDog1.beWalked();
-		int happiness = testOrgDog1.getHappiness();
-		assertEquals(happiness, 5);
+		testOrgDog1.getHappiness();
+		assertEquals(happiness, 6);
 		
 	}
-
+	
+	@Test
+	public void dirtiesCageWhenPoops() {
+		testOrgDog1.setCageCleanliness(4);
+		testOrgDog1.goDogsGo();
+		testOrgDog1.getCageCleanliness();
+		assertEquals(cageCleanliness, 3);
+		
+	}
 }

@@ -2,13 +2,17 @@ package virtualpetsamok1;
 
 public interface Poop {
 		
-	public static void poop () { 
-		int poop = OrganicPet.cleanliness-1;
+	int cleanliness = 0;
+
+	public static poop() { 
+		
 	}
 	
 	public static int poopTick() {
-		if (OrganicPet.beFed(0)) {
-			poopTick = poopTick +1;	
-		}
+		if boolean (OrganicPet.wasFed()) returns true
+		
+		
 	}
+
+	Object poopTick = null;
 }

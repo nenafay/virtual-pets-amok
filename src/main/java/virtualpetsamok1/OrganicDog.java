@@ -2,24 +2,33 @@ package virtualpetsamok1;
 
 public class OrganicDog extends OrganicPet implements Poop{
 	
-
-	public Object thirst;
+	private static int happiness;
+	private int petCageCleanliness;
+	private int petHappiness;
+	
 
 	public OrganicDog(String name, String description, int health, int happiness, int hunger, int thirst, int cageCleanliness) {
-		// TODO Auto-generated constructor stub
 	}
 
-	public void getPetHunger() {
+	public void beWalked() {
+		VirtualPet.petHappiness = OrganicDog.happiness+2;	
+	}
+
+	public void getPetThirst() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void beWalked() {
-		this.happiness+= happiness;
-		this.pooptick -= pooptick);		
+	public void setCageCleanliness(int cageCleanliness) {
+		this.petCageCleanliness = cageCleanliness;
 	}
 
-	public void getPetThirst() {
+	public void goDogsGo() {
+		if (Poop.poopTick == 3) {
+		Poop.poop();
+	}
+
+	public void getCageCleanliness() {
 		// TODO Auto-generated method stub
 		
 	}
