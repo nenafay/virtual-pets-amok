@@ -1,4 +1,6 @@
 package virtualpetsamok1;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PetsShelterApp {
@@ -8,6 +10,17 @@ public class PetsShelterApp {
 		Scanner input = new Scanner(System.in);
 		
 		VirtualPetShelter sunnysideShelter = new VirtualPetShelter();
+		
+		Map<String, VirtualPet> pets = new HashMap<>();
+
+		pets.put("Betty", (VirtualPet) pets);
+		pets.put("Bitz", (VirtualPet) pets);
+		pets.put("Fritz", (VirtualPet) pets);
+		pets.put("Frida", (VirtualPet) pets);
+		pets.put("Sal", (VirtualPet) pets);
+		pets.put("Pal", (VirtualPet) pets);
+		pets.put("Hal", (VirtualPet) pets);
+		pets.put("Daisy", (VirtualPet) pets);
 		
 		OrganicDog pet1 = new OrganicDog("Betty", "a low-down Bassett Hound", 8, 5, 7, 2, 8);
 		RoboticDog pet2 = new RoboticDog("Bitz", "has a few squeaky joints", 6, 9, 4);
@@ -23,8 +36,8 @@ public class PetsShelterApp {
 		+ "\n" + "Visitors can tend to our pets, adopt a pet, or place a pet in our care." + "\n\n"
 		+ "What would you like to do today?" + "\n");
 		
-//			while (sunnysideShelter.hasPets()) {// need to make test for this in VPSTest
-				System.out.println("press 1 to volunteer" +
+			while (sunnysideShelter.hasPets()) {	
+			System.out.println("press 1 to volunteer" +
 					"\n" + "press 2 to adopt a pet" +  
 					"\n" + "press 3 to place a pet in our care");
 				
@@ -104,12 +117,11 @@ public class PetsShelterApp {
 				}
 			}else if (interaction == 2) {
 				System.out.println("How wonderful!" + "\n" + 
-//						"We have" + pets.size() + "pets available for adoption." +
+						"We have" + pets.size() + "pets available for adoption." +
 						"They are: " + sunnysideShelter.returnAllPetsNames() + "\n" +
 						"\n Please select a pet by typing its name below.");
 					String adoptChoice = input.nextLine();
-//					sunnysideShelter.adoptPet(adoptChoice);
-					//need to check adoptPet method in VPS
+					sunnysideShelter.adoptPet(adoptChoice);
 			}else if (interaction == 3) {
 				System.out.println("We understand that sometimes pet owners have to make these difficult decisions." +
 			"\n" + "(And we're not judging you at all.)" + "");
@@ -125,6 +137,11 @@ public class PetsShelterApp {
 				//need to make this work and put in results for newPet type choice options
 			}else {
 				System.exit(0);
-		}
+//		}System.out.println("It looks like all our pets have been adopted. What a glorious day!");
+//		System.out.println("If you have a pet to place in our care, please press 1. Otherwise press 9 to exit.");
+//		int careChoice = input.nextInt();
+//		if (careChoice ==1) {
+			}
+		}		
 	}
 }

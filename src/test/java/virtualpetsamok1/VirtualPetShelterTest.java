@@ -2,6 +2,7 @@ package virtualpetsamok1;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -44,8 +45,9 @@ public class VirtualPetShelterTest {
 	@Test
 	public void allowsAdoption() {
 		underTest.addPet(testpet3);
-		VirtualPet foundPet = underTest.findPet(testpet3.getPetName());
-		assertThat(foundPet, is(nullValue()));
+		underTest.findPet(testpet3.getPetName());
+		underTest.adoptPet(testpet3.getPetName());
+		assertThat(testpet3.getPetName(), is(nullValue()));
 		
 	}
 	
@@ -127,8 +129,6 @@ public class VirtualPetShelterTest {
 		assertThat(testpet1.getThirst(), is(1));
 		assertThat(testpet2.getThirst(), is(1));
 		
-	}
-	
-	
+	} 
 }
 

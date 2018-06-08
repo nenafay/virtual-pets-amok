@@ -63,4 +63,25 @@ public class VirtualPetShelter {
 			pet.tick();
 		}
 	}
-}
+
+	public int hasNumPets() {
+		return pets.size();
+	}
+
+	public void adoptPet(String name) {
+		pets.remove(name);
+		
+	}
+	public boolean hasPets() {
+		if (pets.isEmpty()) {
+		}return false;
+	}
+	public void walkAllDogs(){
+		for(VirtualPet pet : getAllPets()) {
+			if (pet instanceof RoboticDog || pet instanceof OrganicDog) {
+			((RoboticDog)pet).beWalked();
+			((OrganicDog)pet).beWalked();
+			}
+		}
+	}
+} 

@@ -3,7 +3,6 @@ package virtualpetsamok1;
 public class OrganicDog extends OrganicPet implements Poop {
 	public int poopTick;
 	public int petCleanliness;
-	public int happiness;
 	public int poop;
 
 	public OrganicDog(String name, String description, int health, int happiness, int hunger, int thirst, int cleanliness) {
@@ -12,7 +11,7 @@ public class OrganicDog extends OrganicPet implements Poop {
 	}
 
 	public void beWalked() {
-		happiness += 2;
+		petHappiness += 2;
 		poopTick = 1;//when dog is created, set pooptick to 1. When walked, return to 1.
 	}
 
