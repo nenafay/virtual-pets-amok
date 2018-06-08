@@ -1,6 +1,7 @@
 
-Went back to original plan re- poop interface. 
-included dog robot and cat robot.
-Got tests to pass... but then POOF! They stopped passing.
-I don't understand iterables yet and I need to.
-There's no app yet. I'm working on it.
+File contains robotic and organic dogs and cats
+the ability to adopt and leave pets
+the ability to feed and water organic pets
+dogs can be walked
+still working on poop interface and methods re = litterbox and dogs' cages.
+
