@@ -30,27 +30,37 @@ public class VirtualPetShelter {
 	}
 
 	void feedOrganicPets() {
-		OrganicPet.beFed(0);
+		for (VirtualPet pet : getAllPets()) {
+			if (pet instanceof OrganicPet) {
+				((OrganicPet)pet).beFed();
+			}
+		}
 	}
 
 	void waterOrganicPets() {
-		OrganicPet.beWatered(0);
+		for (VirtualPet pet : getAllPets()) {
+			if (pet instanceof OrganicPet) {
+				((OrganicPet)pet).beWatered();
+			}
+		}
 	}
 
 	public void oilRoboticPets() {
-		RoboticPet.beOiled(0);
+		for (VirtualPet pet : getAllPets()) {
+			if(pet instanceof RoboticPet) {
+				((RoboticPet)pet).beOiled();
+			}
+		}
 	}
-
-	public void allowPlay() {
-		VirtualPet.bePlayedWith(0);
+		
+	public void allowPlay(String name) {
+		pets.get(name).bePlayedWith();
+		
 	}
 
 	public void tick() {
-		OrganicPet.increaseHunger(0);
-		OrganicPet.increaseThirst(0);
-		RoboticPet.decreaseOilLevel(0);
+		for (VirtualPet pet : getAllPets()) {
+			pet.tick();
+		}
 	}
-
-	
-
 }

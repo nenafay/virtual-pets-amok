@@ -1,51 +1,56 @@
 package virtualpetsamok1;
 
-public abstract class OrganicPet extends VirtualPet implements Poop{
+public abstract class OrganicPet extends VirtualPet implements Poop {
 
-	public static int cleanliness;
-	public static int statHunger;
-	public static int statThirst;
+	protected int petHunger;
+	protected int petThirst;
+	protected int poopTick;
 
-	public void setHunger(int hunger) {
-		OrganicPet.statHunger = hunger;
-	}
+	public OrganicPet(String name, String description, int health, int happiness, int hunger, int thirst) {
+		super(name, description, health, happiness);
+		petHunger = hunger;
+		petThirst = thirst;
+	}	
 	
-	public static int getHunger() {
-		return OrganicPet.statHunger;
+	public void setHunger(int hunger) {
+		this.petHunger = hunger;
+	}
+
+	public int getHunger() {
+		return petHunger;
 	}
 
 	public void setThirst(int thirst) {
-		OrganicPet.statThirst = thirst;
+		this.petThirst = thirst;
 	}
 
 	public int getThirst() {
-		return OrganicPet.statThirst;
+		return petThirst;
 	}
 
-	public static void beFed(int hunger) {
-		hunger = hunger -3;	
-		
+	public void beFed() {
+		petHunger -= 3;
+		poopTick +=1;
 	}
 
-	public static void beWatered(int thirst) {
-		thirst = thirst -2;
+	public void beWatered() {
+		petThirst -= 2;
 	}
 
-	public static void increaseHunger(int hunger) {
-		hunger = hunger + 1;
+	public void increaseHunger() {
+		petHunger += 1;
 	}
 
-	public static void increaseThirst(int thirst) {
-		thirst = thirst +1;
+	public void increaseThirst() {
+		petThirst += 1;
+
+	}
+	
+	public void tick() {
+		petHunger += 1;
+		petThirst += 1;
+			
 	}
 
-	public static boolean wasFed() {
-		int hungerBefore = OrganicPet.getHunger();
-		OrganicPet.beFed(0);
-		int hungerAfter = OrganicPet.getHunger();
-		if (hungerBefore > hungerAfter);
-		{
-		return false;
-		}
-	}
+	public abstract void poop();
 }

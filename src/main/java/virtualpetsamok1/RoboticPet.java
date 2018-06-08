@@ -1,24 +1,33 @@
 package virtualpetsamok1;
 
 public class RoboticPet extends VirtualPet{
+	
+	private int petOilLevel;
 
-	private static int oilLevel;
-	private int statOilLevel;
+	public RoboticPet(String name, String description, int health, int happiness, int oilLevel) {
+		super(name, description, health, happiness);
+		
+		petOilLevel = oilLevel;
+	}
 	
 	public void setOilLevel(int oilLevel) {
-		this.statOilLevel = oilLevel;
+		this.petOilLevel = oilLevel;
 	}
 
 	public int getOilLevel() {
-		return this.statOilLevel;
+		return this.petOilLevel;
 	}
 
-	public static void beOiled(int oilLevel) {
-		oilLevel = oilLevel+3;
+	public void beOiled() {
+		petOilLevel += 3;
 	}
 
-	public static void decreaseOilLevel(int i) {
-		oilLevel = oilLevel-1;
+	public void decreaseOilLevel() {
+		petOilLevel -= 1;
+	}
+	
+	public void tick() {
+		petOilLevel -= 1;
 	}
 
 	

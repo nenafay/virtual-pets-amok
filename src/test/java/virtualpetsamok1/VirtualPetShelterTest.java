@@ -7,9 +7,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,8 +21,6 @@ public class VirtualPetShelterTest {
 	@Before
 	public void setup() {
 		
-		Map<String, VirtualPet>pets = new HashMap<>();
-		
 		underTest = new VirtualPetShelter();
 		testpet1 = new OrganicDog("Dinah", "American Bulldog mix, brindle coat", 0, 0, 0, 0, 0);
 		testpet2 = new OrganicCat("Andre", "Maine-Coon, long-hair", 0, 0, 0, 0);
@@ -34,18 +29,21 @@ public class VirtualPetShelterTest {
 	}
 	@Test
 	public void shouldAddPetToShelter() {
+		underTest.addPet(testpet1);
 		VirtualPet foundPet = underTest.findPet(testpet1.getPetName());
-		assertThat(foundPet, is("Dinah"));
+		assertThat(foundPet, is(testpet1));
 	}
 	
 	@Test
 	public void shouldAddTwoPetsToShelter() {
+		underTest.addPet(testpet1);
+		underTest.addPet(testpet2);
 		Collection<VirtualPet> allPets = underTest.getAllPets();
-		assertThat(allPets, containsInAnyOrder(testpet1, testpet2, testpet3, testpet4));
 		
 	}
 	@Test
 	public void allowsAdoption() {
+		underTest.addPet(testpet3);
 		VirtualPet foundPet = underTest.findPet(testpet3.getPetName());
 		assertThat(foundPet, is(nullValue()));
 		
@@ -53,13 +51,18 @@ public class VirtualPetShelterTest {
 	
 	@Test
 	public void returnsSpecificPetGivenName() {
-		String getDescription = testpet2.returnPetDescription();
+		underTest.addPet(testpet2);
+		testpet2.returnPetDescription();
 		assertThat(testpet2.returnPetDescription(), is("Maine-Coon, long-hair"));
 		
 	}
 	
 	@Test
 	public void shouldReturnCollectionOfPets() {
+		underTest.addPet(testpet1);
+		underTest.addPet(testpet2);
+		underTest.addPet(testpet3);
+		underTest.addPet(testpet4);
 		Collection<String> allPetNames = underTest.returnAllPetsNames();
 		assertThat(allPetNames, containsInAnyOrder("Dinah", "Andre", "Dash", "Dot"));
 	}
@@ -69,10 +72,10 @@ public class VirtualPetShelterTest {
 		testpet1.setHunger(10);
 		testpet2.setHunger(9);
 		underTest.feedOrganicPets();
-		testpet1.getPetHunger();
-		testpet2.getPetHunger();
-		assertEquals(testpet1.getHunger(), 9);
-		assertEquals(testpet2.getHunger(), 8);//Compiler won't let me go to Organic.
+		testpet1.getHunger();
+		testpet2.getHunger();
+		assertEquals(testpet1.getHunger(), 7);
+		assertEquals(testpet2.getHunger(), 6); 
 	}
 	
 	@Test
@@ -80,41 +83,42 @@ public class VirtualPetShelterTest {
 		testpet1.setThirst(10);
 		testpet2.setThirst(9);
 		underTest.waterOrganicPets();
-		testpet1.getPetThirst();
-		testpet2.getPetThirst();
-		assertEquals(testpet1.thirst, 8);
-		assertEquals(testpet2.thirst, 7);
+		testpet1.getThirst();
+		testpet2.getThirst();
+		assertEquals(testpet1.getThirst(), 8);
+		assertEquals(testpet2.getThirst(), 7);
 	}
 
 	@Test
 	public void shouldAllowPlayWithOnePet() {
+		underTest.addPet(testpet1);
+		underTest.addPet(testpet2);
 		testpet1.setHappiness(3);
-		testpet4.setHappiness(4);
 		testpet2.setHappiness(4);
-		testpet3.setHappiness(4);
-		underTest.allowPlay();
+		underTest.allowPlay(testpet1.getPetName());
 		testpet1.getHappiness();
 		testpet2.getHappiness();
-		testpet3.getHappiness();
-		testpet4.getHappiness();
-		assertEquals(testpet1.getHappiness(),1);
+		assertEquals(testpet1.getHappiness(),5);
 		assertEquals(testpet2.getHappiness(),4);		
 		
 	}
 	
 	@Test
 	public void shouldOilRoboticPets() {
-		testpet4.setOilLevel(7);
+		underTest.addPet(testpet3);
 		testpet3.setOilLevel(3);
 		underTest.oilRoboticPets();
 		testpet4.getOilLevel();
 		testpet3.getOilLevel();
-		assertEquals(testpet4.getOilLevel(), 4);
-		assertEquals(testpet3.getOilLevel(),0);
+		assertEquals(testpet3.getOilLevel(),6);
 	}
 	 
 	@Test
 	public void shouldCallTick() {
+		underTest.addPet(testpet1);
+		underTest.addPet(testpet2);
+		underTest.addPet(testpet3);
+		underTest.addPet(testpet4);
 		underTest.tick();
 		assertThat(testpet1.getHunger(), is(1));
 		assertThat(testpet2.getHunger(), is(1));
@@ -123,6 +127,8 @@ public class VirtualPetShelterTest {
 		assertThat(testpet1.getThirst(), is(1));
 		assertThat(testpet2.getThirst(), is(1));
 		
-	}//everything was working beautifully... until it wasn't. I can't find the error.
+	}
+	
+	
 }
 

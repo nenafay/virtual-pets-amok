@@ -5,16 +5,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import virtualpetsamok1.Litterbox;
 import virtualpetsamok1.OrganicDog;
 
 public class OrganicDogTest {
 	
 	OrganicDog testOrgDog1;
 	OrganicDog testOrgDog2;
-	Litterbox testLitter = new Litterbox();
-	private Object cageCleanliness;
-	private Object happiness;
+	private Object cleanliness;
 	
 
 	@Before
@@ -38,43 +35,40 @@ public class OrganicDogTest {
 	public void shouldHaveHunger() {
 		testOrgDog1.setHunger(10);
 		int hunger = testOrgDog1.getHunger();
-		
 		assertEquals(10, hunger);
 	}
 	
 	@Test
 	public void shouldHaveThirst() {
-		
 		testOrgDog1.setThirst(10);
 		int hunger = testOrgDog1.getThirst();
-		
 		assertEquals(10, hunger);
 		
 	}
 	
 	@Test
 	public void shouldHaveHappiness() {
-		testOrgDog1.setHappiness(10);
+		testOrgDog1.setPetHappiness(10);
 		int happiness = testOrgDog1.getHappiness();
-		
 		assertEquals(10, happiness);
 	}
 
 	@Test
 	public void walkiesMakeDogHappy() {
-		testOrgDog1.setHappiness(4);
+		testOrgDog1.setPetHappiness(4);
 		testOrgDog1.beWalked();
-		testOrgDog1.getHappiness();
+		int happiness = testOrgDog1.getHappiness();
 		assertEquals(happiness, 6);
 		
 	}
-	
 	@Test
 	public void dirtiesCageWhenPoops() {
-		testOrgDog1.setCageCleanliness(4);
+		testOrgDog1.setPetCleanliness(4);
 		testOrgDog1.goDogsGo();
-		testOrgDog1.getCageCleanliness();
-		assertEquals(cageCleanliness, 3);
-		
+		testOrgDog1.beFed();
+		testOrgDog1.beFed();
+		testOrgDog1.beFed();
+		testOrgDog1.getPetCleanliness();
+		assertEquals(cleanliness, 3);
 	}
 }

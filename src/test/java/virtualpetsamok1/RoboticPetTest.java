@@ -12,7 +12,7 @@ public class RoboticPetTest {
 	
 	@Before
 	public void setUP() {
-		testRobotic = new RoboticPet();
+		testRobotic = new RoboticPet(null, null, 0, 0, 0);
 	}
 
 	@Test
@@ -28,7 +28,7 @@ public class RoboticPetTest {
 	
 	@Test
 	public void shouldHaveHappiness() {
-		testRobotic.setHappiness(10);
+		testRobotic.setPetHappiness(10);
 		int happiness = testRobotic.getHappiness();
 		
 		assertEquals(10, happiness);

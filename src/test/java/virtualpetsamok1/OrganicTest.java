@@ -27,7 +27,7 @@ public class OrganicTest {
 	
 	@Test
 	public void shouldHaveHappiness() {
-		testOrganicDog.setHappiness(10);
+		testOrganicDog.setPetHappiness(10);
 		int happiness = testOrganicDog.getHappiness();
 		
 		assertEquals(10, happiness);

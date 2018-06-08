@@ -1,38 +1,50 @@
 package virtualpetsamok1;
 
-public class OrganicDog extends OrganicPet implements Poop{
-	
-	private static int happiness;
-	private int petCageCleanliness;
-	private int petHappiness;
-	
+public class OrganicDog extends OrganicPet implements Poop {
+	public int poopTick;
+	public int petCleanliness;
+	public int happiness;
+	public int poop;
 
-	public OrganicDog(String name, String description, int health, int happiness, int hunger, int thirst, int cageCleanliness) {
+	public OrganicDog(String name, String description, int health, int happiness, int hunger, int thirst, int cleanliness) {
+	super(name, description, health, happiness, hunger, thirst);
+		petCleanliness = cleanliness;
 	}
 
 	public void beWalked() {
-		VirtualPet.petHappiness = OrganicDog.happiness+2;	
+		happiness += 2;
+		poopTick = 1;//when dog is created, set pooptick to 1. When walked, return to 1.
 	}
 
 	public void getPetThirst() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public void setCageCleanliness(int cageCleanliness) {
-		this.petCageCleanliness = cageCleanliness;
 	}
 
 	public void goDogsGo() {
-		if (Poop.poopTick == 3) {
-		Poop.poop();
+		if (this.poopTick() % 3 == 0) {
+			this.poop();
+		}
+		petCleanliness -= 1;
+
 	}
 
-	public void getCageCleanliness() {
+	public int getPetCleanliness() {
+		return petCleanliness;
+	}
+
+	public void setPetCleanliness(int petCleanliness) {
+		this.petCleanliness = petCleanliness;
+	}
+
+	@Override
+	public void poop() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	
+	@Override
+	public int poopTick() {
+		return ++poopTick ;
+	}
 
 }

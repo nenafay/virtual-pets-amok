@@ -1,13 +1,19 @@
 package virtualpetsamok1;
 
-public abstract class VirtualPet {
+public abstract class VirtualPet implements Comparable<VirtualPet> {
 
-	private int petHealth;
-	protected static int petHappiness;
+	protected int petHealth;
+	protected int petHappiness;
 	private String petName;
 	private String petDescription;
 
-	
+	public VirtualPet(String name, String description, int health, int happiness) {
+		petHealth = health;
+		petHappiness = happiness;
+		petName = name;
+		petDescription = description;
+				
+	}
 	/* Health Methods */
 	
 	public int getHealth() {
@@ -25,16 +31,16 @@ public abstract class VirtualPet {
 
 	/* Happiness Methods */
 	
-	public void setHappiness(int happiness) {
-		this.setPetHappiness(happiness);
-	}
-
 	public int getHappiness() {
 		return this.getPetHappiness();
 	}
 	
 	public void decreasePetHappiness(int happiness){
 		this.setPetHappiness(this.getPetHappiness() - happiness);
+	}
+	
+	public void setHappiness(int happiness) {
+		this.petHappiness = happiness;
 	}
 
 	/* Health/Happiness Methods */
@@ -63,8 +69,26 @@ public abstract class VirtualPet {
 		this.petHappiness = happiness;
 	}
 
-	public static void bePlayedWith(int happiness) {
-		happiness = happiness + 2; 
+	public void bePlayedWith() {
+		petHappiness += 2; 
 	}
+	@Override
+	public String toString() {
+		return this.petName;
+	}
+	@Override
+	public int compareTo(VirtualPet pet) {
+		if(this.getPetName().compareTo(pet.getPetName()) < 0) {
+			return -1;
+		} else if (this.getPetName().compareTo(pet.getPetName()) > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	public abstract void tick();
+	//pets implement tick in own way
+		
 	
 }
