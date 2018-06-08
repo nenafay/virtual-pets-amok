@@ -1,26 +1,13 @@
 package virtualpetsamok1;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class PetsShelterApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args, VirtualPet pet) {
 		
 		Scanner input = new Scanner(System.in);
 		
 		VirtualPetShelter sunnysideShelter = new VirtualPetShelter();
-		
-		Map<String, VirtualPet> pets = new HashMap<>();
-
-		pets.put("Betty", (VirtualPet) pets);
-		pets.put("Bitz", (VirtualPet) pets);
-		pets.put("Fritz", (VirtualPet) pets);
-		pets.put("Frida", (VirtualPet) pets);
-		pets.put("Sal", (VirtualPet) pets);
-		pets.put("Pal", (VirtualPet) pets);
-		pets.put("Hal", (VirtualPet) pets);
-		pets.put("Daisy", (VirtualPet) pets);
 		
 		OrganicDog pet1 = new OrganicDog("Betty", "a low-down Bassett Hound", 8, 5, 7, 2, 8);
 		RoboticDog pet2 = new RoboticDog("Bitz", "has a few squeaky joints", 6, 9, 4);
@@ -39,7 +26,8 @@ public class PetsShelterApp {
 			while (sunnysideShelter.hasPets()) {	
 			System.out.println("press 1 to volunteer" +
 					"\n" + "press 2 to adopt a pet" +  
-					"\n" + "press 3 to place a pet in our care");
+					"\n" + "press 3 to place a pet in our care" +
+					"\n" + "press 4 to exit.");
 				
 			int interaction = input.nextInt();			
 			if (interaction ==1) {
@@ -83,13 +71,13 @@ public class PetsShelterApp {
 				//if-else statement, volunteer options
 				int volunteerChoice = input.nextInt();
 				sunnysideShelter.tick();
+				
 				if (volunteerChoice == 1) {
 					sunnysideShelter.feedOrganicPets();
 				}else if (volunteerChoice ==2){
 					sunnysideShelter.waterOrganicPets();
 				}else if (volunteerChoice == 3) {
-//					sunnysideShelter.walkDogs();
-					//need to make method for walking all the dogs from VPS
+					sunnysideShelter.walkAllDogs();
 				}else if (volunteerChoice == 4) {
 					sunnysideShelter.oilRoboticPets();
 				}else if (volunteerChoice == 5){
@@ -100,6 +88,7 @@ public class PetsShelterApp {
 					System.out.println("To clean the cats' litterbox, please press 1. \n" + 
 					"To clean the dogs' cages, please press 2.");
 					int cleanChoice = input.nextInt();
+					
 					if (cleanChoice == 1 ) {
 //						sunnysideShelter.emptyLitterbox();
 						//need to write emptyLitterbox method in VPS
@@ -117,31 +106,72 @@ public class PetsShelterApp {
 				}
 			}else if (interaction == 2) {
 				System.out.println("How wonderful!" + "\n" + 
-						"We have" + pets.size() + "pets available for adoption." +
+						"We have" + sunnysideShelter.hasNumPets() + "pets available for adoption." +
 						"They are: " + sunnysideShelter.returnAllPetsNames() + "\n" +
 						"\n Please select a pet by typing its name below.");
 					String adoptChoice = input.nextLine();
 					sunnysideShelter.adoptPet(adoptChoice);
+					
 			}else if (interaction == 3) {
 				System.out.println("We understand that sometimes pet owners have to make these difficult decisions." +
 			"\n" + "(And we're not judging you at all.)" + "");
 				System.out.println("What is your pet's name?");
-				String newPet = input.nextLine();
-				System.out.println("We welcome " + newPet + " to Sunnyside!" + "\n" +
-				"What kind of pet is " + newPet +"? Please choose from the options below:");
+				String newPetName = input.nextLine();
+				System.out.println("We welcome " + newPetName + " to Sunnyside!" + "\n" +
+				"What kind of pet is " + newPetName +"? Please choose from the options below:");
 				System.out.println("press 1 for Organic Dog\n" + 
 				"press 2 for OrganicCat\n" + 
 				"press 3 for Robotic Dog\n" + 
 				"press 4 for Robotic Cat");
-//				sunnysideShelter.addPet(newPet);
-				//need to make this work and put in results for newPet type choice options
-			}else {
+				int newPetType = input.nextInt();
+				if (newPetType == 1) {
+					OrganicDog newOrgDog = new OrganicDog(newPetName, "is a good boy", 10, 10, 0, 0, 10);
+					sunnysideShelter.addPet(newOrgDog);
+				} else if (newPetType == 2) {
+					OrganicCat newOrgCat = new OrganicCat(newPetName, "stares at you with contempt, ", 10, 10, 0, 0);
+					sunnysideShelter.addPet(newOrgCat);
+				} else if (newPetType == 3) {
+					RoboticDog newRoboDog = new RoboticDog(newPetName, "emits sparks from time to time", 10, 10 ,10);
+					sunnysideShelter.addPet(newRoboDog);
+				} else if (newPetType ==4) {
+					RoboticCat newRoboCat = new RoboticCat(newPetName, "comes with its own laser-pointer", 10, 10, 10);
+					sunnysideShelter.addPet(newRoboCat);
+				}
+			}else if (interaction == 4){
+				System.out.println("Thanks for stopping by! Goodbye!");
 				System.exit(0);
-//		}System.out.println("It looks like all our pets have been adopted. What a glorious day!");
-//		System.out.println("If you have a pet to place in our care, please press 1. Otherwise press 9 to exit.");
-//		int careChoice = input.nextInt();
-//		if (careChoice ==1) {
 			}
-		}		
+		} {System.out.println("It looks like all our pets have been adopted. What a glorious day!");
+		System.out.println("If you have a pet to place in our care, please press 1. Otherwise press 9 to exit.");
+		int careChoice = input.nextInt();
+		if (careChoice ==1) {
+			}				System.out.println("We understand that sometimes pet owners have to make these difficult decisions." +
+					"\n" + "(And we're not judging you at all.)" + "");
+			System.out.println("What is your pet's name?");
+			String newPetName = input.nextLine();
+			System.out.println("We welcome " + newPetName + " to Sunnyside!" + "\n" +
+			"What kind of pet is " + newPetName +"? Please choose from the options below:");
+			System.out.println("press 1 for Organic Dog\n" + 
+			"press 2 for OrganicCat\n" + 
+			"press 3 for Robotic Dog\n" + 
+			"press 4 for Robotic Cat");
+			int newPetType = input.nextInt();
+			if (newPetType == 1) {
+				OrganicDog newOrgDog = new OrganicDog(newPetName, "is a good boy", 10, 10, 0, 0, 10);
+				sunnysideShelter.addPet(newOrgDog);
+			} else if (newPetType == 2) {
+				OrganicCat newOrgCat = new OrganicCat(newPetName, "stares at you with contempt, ", 10, 10, 0, 0);
+				sunnysideShelter.addPet(newOrgCat);
+			} else if (newPetType == 3) {
+				RoboticDog newRoboDog = new RoboticDog(newPetName, "emits sparks from time to time", 10, 10 ,10);
+				sunnysideShelter.addPet(newRoboDog);
+			} else if (newPetType ==4) {
+				RoboticCat newRoboCat = new RoboticCat(newPetName, "comes with its own laser-pointer", 10, 10, 10);
+				sunnysideShelter.addPet(newRoboCat);
+		} else if (careChoice ==9) {
+			System.out.println("Thanks for stopping by! Goodbye!");
+			System.exit(0);
+			}
+		}
 	}
 }
