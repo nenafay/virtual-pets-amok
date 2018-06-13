@@ -45,9 +45,8 @@ public class VirtualPetShelterTest {
 	@Test
 	public void allowsAdoption() {
 		underTest.addPet(testpet3);
-		underTest.findPet(testpet3.getPetName());
 		underTest.adoptPet(testpet3.getPetName());
-		assertThat(testpet3.getPetName(), is(nullValue()));
+		assertThat(underTest.findPet(testpet3.getPetName()), is(nullValue()));
 		
 	}
 	
@@ -71,6 +70,8 @@ public class VirtualPetShelterTest {
 	
 	@Test
 	public void shouldFeedOrganicPets() {
+		underTest.addPet(testpet1);
+		underTest.addPet(testpet2);
 		testpet1.setHunger(10);
 		testpet2.setHunger(9);
 		underTest.feedOrganicPets();
@@ -82,6 +83,8 @@ public class VirtualPetShelterTest {
 	
 	@Test
 	public void shouldWaterOrganicPets() {
+		underTest.addPet(testpet1);
+		underTest.addPet(testpet2);
 		testpet1.setThirst(10);
 		testpet2.setThirst(9);
 		underTest.waterOrganicPets();
