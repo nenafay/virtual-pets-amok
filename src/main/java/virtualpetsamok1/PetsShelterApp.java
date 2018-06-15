@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class PetsShelterApp {
 
-	public static void main(String[] args, VirtualPet pet) {
+	public static void main(String[] args) {
 		
 		Scanner input = new Scanner(System.in);
 		
@@ -17,6 +17,15 @@ public class PetsShelterApp {
 		OrganicCat pet6 = new OrganicCat("Pal", "a sweet calico. Likes laser tag.", 8, 9, 7, 9);
 		RoboticCat pet7 = new RoboticCat("Hal", "has one eye. Calls you Dave.", 9, 5, 10);
 		RoboticDog pet8 = new RoboticDog("Daisy", "likes chasing bicycles.", 10, 10, 10);
+
+		sunnysideShelter.addPet(pet1);
+		sunnysideShelter.addPet(pet2);
+		sunnysideShelter.addPet(pet3);
+		sunnysideShelter.addPet(pet4);
+		sunnysideShelter.addPet(pet5);
+		sunnysideShelter.addPet(pet6);
+		sunnysideShelter.addPet(pet7);
+		sunnysideShelter.addPet(pet8);
 		
 		System.out.println("Welcome to Sunnyside SpaceStation Pet Shelter and Sanitarium" + "\n"
 		+ "Sunnyside is home to a variety of pets, both organic and robotic, sane and less-sane."
@@ -33,34 +42,45 @@ public class PetsShelterApp {
 			if (interaction ==1) {
 				System.out.println("Excellent! We love volunteers! \n" + 
 				"First, let me show you our pets.");
+				
 				//pet stat grid
+				
 				System.out.println("Name" + "\t|" + "health" + "\t|" + "happy" + "\t|"
-				+ "hunger"+ "\t|" + "thirst" + "\t|" + "clean" + "\t|" + "oil" + "\n");
-				System.out.println(pet1.getPetName() + "\t|" + pet1.getHealth() + "\t|" + 
-						pet1.getHappiness() + "\t|" + pet1.getHunger() + "\t|" + pet1.getThirst() + "\t|" +
-						pet1.getPetCleanliness() + "\t|" + "-");
-				System.out.println(pet2.getPetName() + "\t|" + pet2.getHealth() + "\t|" + 
-						pet2.getHappiness() + "\t|" + "-" + "\t|" + "-" + "\t|" +
-						"-" + "\t|" + pet2.getOilLevel());
-				System.out.println(pet3.getPetName() + "\t|" + pet3.getHealth() + "\t|" + 
-						pet3.getHappiness() + "\t|" + "-" + "\t|" + "-" + "\t|" +
-						"-" + "\t|" + pet3.getOilLevel());
-				System.out.println(pet1.getPetName() + "\t|" + pet1.getHealth() + "\t|" + 
-						pet4.getHappiness() + "\t|" + pet4.getHunger() + "\t|" + pet4.getThirst() + "\t|" +
-						"-"+ "\t|" + "-");
-				System.out.println(pet5.getPetName() + "\t|" + pet5.getHealth() + "\t|" + 
-						pet5.getHappiness() + "\t|" + pet5.getHunger() + "\t|" + pet5.getThirst() + "\t|" +
-						pet5.getPetCleanliness() + "\t|" + "-");
-				System.out.println(pet6.getPetName() + "\t|" + pet6.getHealth() + "\t|" + 
-						pet6.getHappiness() + "\t|" + pet6.getHunger() + "\t|" + pet6.getThirst() + "\t|" +
-						"-" + "\t|" + "-");
-				System.out.println(pet7.getPetName() + "\t|" + pet7.getHealth() + "\t|" + 
-						pet7.getHappiness() + "\t|" + "-" + "\t|" + "-" + "\t|" +
-						"-" + "\t|" + pet7.getOilLevel());
-				System.out.println(pet8.getPetName() + "\t|" + pet8.getHealth() + "\t|" + 
-						pet6.getHappiness() + "\t|" + "-" + "\t|" + "-" + "\t|" +
-						"-" + "\t|" + pet8.getOilLevel());
-				// next input section:
+						+ "hunger"+ "\t|" + "thirst" + "\t|" + "clean" + "\t|" + "oil" + "\n");
+				
+				for (VirtualPet pet : sunnysideShelter.getAllPets()) {
+					
+					String TAB = "\t|";
+					String EMPTY_CELL = "-";
+					
+					String petName = pet.getPetName();
+					int petHealth = pet.getHealth();
+					int petHappiness = pet.getHappiness();
+
+					String output = petName + TAB + petHealth + TAB + petHappiness + TAB;
+					
+					if (pet instanceof OrganicPet) {
+						output += ((OrganicPet) pet).getHunger() + TAB;
+						output += ((OrganicPet) pet).getThirst() + TAB;
+						
+						if (pet instanceof OrganicDog) {
+							output += ((OrganicDog) pet).getPetCleanliness();
+						} else {
+							output += EMPTY_CELL;
+						}
+						output += EMPTY_CELL + TAB;
+					} else {
+						output +=
+							EMPTY_CELL + TAB +
+							EMPTY_CELL + TAB +
+							EMPTY_CELL + TAB +
+							((RoboticPet) pet).getOilLevel();
+					}
+					
+					System.out.println(output);
+				}
+				
+				
 				System.out.println("How would you like to help today? \n" +
 					"press 1 to feed organic pets" + "\n" +
 					"press 2 to water organic pets" + "\n" +
@@ -175,3 +195,4 @@ public class PetsShelterApp {
 		}
 	}
 }
+
