@@ -73,8 +73,8 @@ public class VirtualPetShelter {
 		
 	}
 	public boolean hasPets() {
-		if (pets.isEmpty()) {
-		}return false;
+		if (pets.containsKey("")) {
+		}return true;
 	}
 	public void walkAllDogs(){
 		for(VirtualPet pet : getAllPets()) {
